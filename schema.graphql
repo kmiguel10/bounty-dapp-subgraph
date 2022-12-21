@@ -1,0 +1,31 @@
+type ClaimBounty @entity(immutable: true) {
+  id: Bytes!
+  id: BigInt! # uint256
+  owner: Bytes! # address
+  name: String! # string
+  price: BigInt! # uint256
+  status: Boolean! # bool
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type CreateBounty @entity(immutable: true) {
+  id: Bytes!
+  id: BigInt! # uint256
+  name: String! # string
+  price: BigInt! # uint256
+  status: Boolean! # bool
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type OwnershipTransferred @entity(immutable: true) {
+  id: Bytes!
+  previousOwner: Bytes! # address
+  newOwner: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}

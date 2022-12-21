@@ -1,0 +1,29 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: BountyFactory
+    network: goerli
+    source:
+      address: "0xe678F5afd7258951426F7590DFa5aB71930BC6Cf"
+      abi: BountyFactory
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - ClaimBounty
+        - CreateBounty
+        - OwnershipTransferred
+      abis:
+        - name: BountyFactory
+          file: ./abis/BountyFactory.json
+      eventHandlers:
+        - event: ClaimBounty(indexed uint256,indexed address,string,uint256,bool)
+          handler: handleClaimBounty
+        - event: CreateBounty(indexed uint256,string,uint256,bool)
+          handler: handleCreateBounty
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+      file: ./src/bounty-factory.ts
