@@ -8,6 +8,7 @@ dataSources:
     source:
       address: "0xe678F5afd7258951426F7590DFa5aB71930BC6Cf"
       abi: BountyFactory
+      startBlock: 8174982
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
