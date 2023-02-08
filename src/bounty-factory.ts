@@ -12,6 +12,9 @@ import {
 } from "../generated/schema";
 
 export function handleClaimBounty(event: ClaimBountyEvent): void {
+  let emptyAddress = Address.fromString(
+    "0x0000000000000000000000000000000000000000"
+  );
   //save that event in our graph
   //update activebounty
   //get or create a claimedBounty object
@@ -20,22 +23,23 @@ export function handleClaimBounty(event: ClaimBountyEvent): void {
   //ClaimBountyEvent: just the raw event
   //ClaimBountyObject: what we save
   let bountyClaimed = ClaimBounty.load(
-    getIdFromEventParams(event.params.id, event.params.owner)
+    getIdFromEventParams(event.params.id, emptyAddress)
   );
 
   let activeBounty = ActiveBounty.load(
-    getIdFromEventParams(event.params.id, event.params.owner)
+    getIdFromEventParams(event.params.id, emptyAddress)
   );
 
   if (!bountyClaimed) {
     bountyClaimed = new ClaimBounty(
-      getIdFromEventParams(event.params.id, event.params.owner)
+      getIdFromEventParams(event.params.id, emptyAddress)
     );
   }
 
   bountyClaimed.name = event.params.name;
   bountyClaimed.price = event.params.price;
   bountyClaimed.status = event.params.status;
+  bountyClaimed.owner = event.params.owner;
   activeBounty!.owner = event.params.owner;
 
   bountyClaimed.save();
